@@ -9,6 +9,8 @@ const { sequelize } = require('./models');
 const passportConfig = require('./passport');
 
 const apiRouter = require('./routes/api');
+const postRouter = require('./routes/post');
+const usersRouter = require('./routes/users');
 
 const app = express();
 sequelize.sync();
@@ -25,6 +27,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(passport.initialize());
  
 app.use('/api', apiRouter);
+app.use('/post', postRouter);
+app.use('/users', usersRouter);
 
 app.use((req, res, next) => {  //에러 생성
   const error = new Error('Not Found');
