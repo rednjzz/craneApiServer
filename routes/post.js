@@ -68,7 +68,29 @@ router.post('/', passport.authenticate('jwt', {session: false}), upload2.none(),
   }
 });
 
-router.get('/hashtag', async (req, res, next) => {
+router.get('/', passport.authenticate('jwt', {session: false}), async (req, res, next) => {
+  try {
+    const posts = await Post.findAll({
+      include: {
+        model: User,
+        attributes: ['id', 'nick'],
+      },
+      order: [['createdAt', 'DESC']],
+    })
+    res.status(200).json({
+      code: 200,
+      message: "짹짹 내용전체",
+      twits: posts,
+    });
+  }
+  catch(err){
+    console.error(err);
+    next(err);
+  } 
+  // 나중에 인피니티 스크롤 적용해야 할듯
+})
+
+router.get('/hashtag', passport.authenticate('jwt', {session: false}), async (req, res, next) => {
   const query = req.query.hashtag;
   // if (!query) {
   //   return res.redirect('/');

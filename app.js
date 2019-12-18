@@ -20,7 +20,7 @@ app.set('port', process.env.PORT || 9001);
 
 app.use(cors());
 app.use(logger('dev'));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use('/img', express.static(path.join(__dirname, 'uploads')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
