@@ -98,7 +98,7 @@ router.get('/logout', async (req, res) => {
   res.send(204);
 });
 
-router.get('/test', passport.authenticate('jwt', {session: false}), (req, res) => {
+router.get('/test', (req, res) => {
   res.status(200).json({
     success: 'You are authenticated with JWT', 
     user: req.user
