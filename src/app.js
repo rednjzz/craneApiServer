@@ -29,6 +29,15 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(passport.initialize());
  
+const { ApolloServer } = require('apollo-server-express');
+const typeDefs = require('./graphql/typeDefs');
+const resolvers = require('./graphql/resolvers');
+const schema = require('./graphql/schema');
+const server = new ApolloServer({
+  schema
+})
+server.applyMiddleware( { app })
+
 app.use('/api', apiRouter);
 app.use('/post', postRouter);
 app.use('/users', usersRouter);
