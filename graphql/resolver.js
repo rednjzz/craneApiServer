@@ -23,7 +23,13 @@ const root = {
       order: [['createdAt', 'DESC']],
     })
     return posts;
-  }
+  },
+  post: async (id) => {
+    const post = await Post.findOne({
+      where: id
+    });
+    return post;
+  },
 };
 
 module.exports = root;

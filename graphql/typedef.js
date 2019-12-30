@@ -21,6 +21,7 @@ const schema = buildSchema(`
     users: [User]
     user(id: Int!): User!
     posts: [Post] 
+    post(id: Int!): Post!
   }
 `);
 
